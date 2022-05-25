@@ -1,0 +1,7 @@
+extends layout.pug
+
+block content
+  ul
+    each user, index in users
+      li
+        a(href="user/" + user.id)= user.email
