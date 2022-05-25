@@ -1,0 +1,29 @@
+extends layout.pug
+
+block content
+  h2 Register a user
+  form#register
+    div.form-row
+      input(required, type="email", name="email", id="email", placeholder="Email", autocomplete="off")
+      input(required, type="password", name="password", id="password", placeholder="Password")
+    div.form-row
+      div.checkbox-group
+        input(type="checkbox", name="subscribe", id="subscribe", value="true", checked)
+        label(for="subscribe") Subscribe to the newsletter
+      input(type="submit", value="Register")
+
+  h2 All users
+  table
+    thead 
+      tr 
+        th EMAIL
+        th SUBSCRIBED
+        th DELETE
+    tbody 
+    each user, index in users
+      tr 
+        td= user.email
+        td
+          input(data-subscribed-status, data-id=user.id, type="checkbox", name="subscribed-" + user.id, checked=(user.isSubscribed ? true : false))
+        td 
+          button(data-id=user.id, data-email=user.email).delete-button Delete

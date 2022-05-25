@@ -9,7 +9,7 @@ const db = mongoose.connection;
 db.on("error", err => console.error(err));
 db.once("open", () => chalk.greenBright("Connected to MongoDB"));
 
-import { router as mainRouter } from "./routes/main.js";
+import { router as mainRouter } from "./routes/admin.js";
 import { router as apiRouter } from "./routes/api.js";
 
 const port = 3000;

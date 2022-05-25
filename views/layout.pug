@@ -7,15 +7,11 @@ html
     link(rel='preconnect', href='https://fonts.googleapis.com')
     link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin)
     link(href='https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap', rel='stylesheet')
+    script(src="script.js", defer) 
 
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
     div#header
-      a(href="/")
-        h1 Newsletter Admin
-      div#nav
-        a(class=(title === "Home" ? "active" : ""), href="/") Home
-        a(class=(title === "Users" ? "active" : ""), href="/users") Users
-        a(class=(title === "Create a user" ? "active" : ""), href="/register") Register
+      h1 Newsletter Admin
 
     block content
