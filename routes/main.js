@@ -1,16 +1,9 @@
 import { Router } from "express";
+import { User } from "../models/user.js";
+
 export const router = Router();
 
-let users = [
-  {
-    id: 1,
-    email: "assar.classon@gmail.com",
-  },
-  {
-    id: 2,
-    email: "assar.classon2@gmail.com",
-  },
-];
+router.get("/", (req, res) => res.render("index", { title: "Home" }));
 
 router.get("/users", (req, res) =>
   res.render("users", { title: "Users", users })
@@ -21,5 +14,5 @@ router.get("/register", (req, res) =>
 );
 
 router.get("/success", (req, res) =>
-  res.render("message", { title: "succes", msg: "User registered!" })
+  res.render("message", { title: "Success", msg: "User registered!" })
 );
