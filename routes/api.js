@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { User } from "../models/user.js";
+import { User } from "../models/User.js";
 
 export const router = Router();
 
@@ -25,7 +25,7 @@ router.post("/api/user", async (req, res) => {
   const user = new User({
     email: req.body.email,
     password: req.body.password,
-    isSubscribed: req.body.subscribe,
+    isSubscribed: req.body.isSubscribed,
   });
 
   try {
@@ -62,8 +62,8 @@ router.patch("/api/user/:id", getUser, async (req, res) => {
   if (req.body.password != null) {
     res.user.password = req.body.password;
   }
-  if (req.body.subscribe != null) {
-    res.user.isSubscribed = req.body.subscribe;
+  if (req.body.isSubscribed != null) {
+    res.user.isSubscribed = req.body.isSubscribed;
   }
 
   try {
@@ -78,7 +78,6 @@ router.patch("/api/user/:id", getUser, async (req, res) => {
 router.get("/api/users", async (req, res) => {
   try {
     const users = await User.find();
-    console.log(users);
     res.json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });

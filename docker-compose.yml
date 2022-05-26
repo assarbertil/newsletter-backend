@@ -9,4 +9,3 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Pjjnu8PG78aWLZcJKDHdPnc9xwbjwvZU
-      MONGO_INITDB_DATABASE: users

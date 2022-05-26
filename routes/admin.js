@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { User } from "../models/user.js";
+import { User } from "../models/User.js";
 
 export const router = Router();
 
@@ -26,8 +26,6 @@ router.get("/admin", async (req, res) => {
   if (!(username === "admin" && password === "admin")) {
     return reject();
   }
-
-  console.log(await User.find());
 
   res.render("admin", { title: "Admin", users: await User.find() });
 });

@@ -19,11 +19,11 @@ block content
         th EMAIL
         th SUBSCRIBED
         th DELETE
-    tbody 
-    each user, index in users
-      tr 
-        td= user.email
-        td
-          input(data-subscribed-status, data-id=user.id, type="checkbox", name="subscribed-" + user.id, checked=(user.isSubscribed ? true : false))
-        td 
-          button(data-id=user.id, data-email=user.email).delete-button Delete
+    tbody#users
+      each user, index in users
+        tr(data-user=user.id)
+          td= user.email
+          td
+            input(data-is-subscribed, data-id=user.id, type="checkbox", name="subscribed-" + user.id, checked=(user.isSubscribed ? true : false))
+          td 
+            button(data-id=user.id, data-email=user.email).delete-button Delete

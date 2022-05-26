@@ -136,3 +136,35 @@ td {
   text-align: left;
   opacity: 0.9;
 }
+
+/* Animation classes */
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-out {
+  animation: 0.6s ease 1 normal forwards running slide-out;
+}
+
+.slide-in {
+  animation: 0.3s ease 1 normal forwards running slide-in;
+}
