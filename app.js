@@ -4,6 +4,7 @@ import express from "express";
 import { resolve } from "path";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
@@ -22,6 +23,7 @@ app.set("view engine", "pug"); // Template engine
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 app.use(express.static(dirname + "/public")); // Static folder
 
 // Routers
