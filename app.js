@@ -14,15 +14,15 @@ import { router as mainRouter } from "./routes/admin.js";
 import { router as authApiRouter } from "./routes/authApi.js";
 import { router as userApiRouter } from "./routes/userApi.js";
 
-const port = 3001;
+const port = 5678;
 const dirname = resolve("."); // Current directory
 const app = express(); // Create express instance
 
 app.set("view engine", "pug"); // Template engine
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
-app.use(express.static(dirname + "/public")); // Static folder
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static(dirname + "/public")); // Static folder
 
 // Routers
 app.use(mainRouter);
