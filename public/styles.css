@@ -10,6 +10,10 @@ body {
   accent-color: #000;
 }
 
+p {
+  margin-bottom: 2rem;
+}
+
 /* Header */
 
 #header {
@@ -31,6 +35,7 @@ form {
 
 form .form-row {
   display: flex;
+  align-items: center;
   flex-direction: row;
   gap: 1rem;
   flex-wrap: wrap;
@@ -137,7 +142,7 @@ td {
   opacity: 0.9;
 }
 
-/* Animation classes */
+/* Animations */
 
 @keyframes slide-out {
   0% {
@@ -150,6 +155,10 @@ td {
   }
 }
 
+.slide-out {
+  animation: 0.6s ease 1 normal forwards running slide-out;
+}
+
 @keyframes slide-in {
   0% {
     transform: translateX(-50%);
@@ -159,10 +168,6 @@ td {
     transform: translateX(0);
     opacity: 1;
   }
-}
-
-.slide-out {
-  animation: 0.6s ease 1 normal forwards running slide-out;
 }
 
 .slide-in {
