@@ -3,6 +3,7 @@ import chalk from "chalk";
 import express from "express";
 import { resolve } from "path";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
@@ -10,9 +11,10 @@ db.on("error", err => console.error(err));
 db.once("open", () => chalk.greenBright("Connected to MongoDB"));
 
 import { router as mainRouter } from "./routes/admin.js";
-import { router as apiRouter } from "./routes/api.js";
+import { router as authApiRouter } from "./routes/authApi.js";
+import { router as userApiRouter } from "./routes/userApi.js";
 
-const port = 3000;
+const port = 3001;
 const dirname = resolve("."); // Current directory
 const app = express(); // Create express instance
 
@@ -20,10 +22,12 @@ app.set("view engine", "pug"); // Template engine
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 app.use(express.static(dirname + "/public")); // Static folder
 app.use(express.json());
+app.use(cookieParser());
 
 // Routers
 app.use(mainRouter);
-app.use(apiRouter);
+app.use(authApiRouter);
+app.use(userApiRouter);
 
 // Make server available on port
 app.listen(port, () =>

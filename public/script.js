@@ -5,7 +5,7 @@ const subscribeField = document.getElementById("subscribe");
 // Register a user based on the input parameters
 const registerUser = (email, password, subscribe) => {
   axios
-    .post("/api/user", {
+    .post("/api/register", {
       email,
       password,
       isSubscribed: subscribe,
