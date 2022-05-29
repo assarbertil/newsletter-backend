@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { User } from "../models/User.js";
+import { User } from "../models/user.js";
 import * as argon2 from "argon2";
 import { createAccessToken } from "../lib/jwt.js";
 
