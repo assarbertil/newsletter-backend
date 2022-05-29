@@ -11,7 +11,6 @@ All environment variables need to be set in order to use this service.
 MONGODB_URL="mongodb://<user>:<password>@<host>:27017/"
 FRONTEND_URL="<url>"
 ACCESS_TOKEN_SECRET="<random string>"
-REFRESH_TOKEN_SECRET="<random string>"
 ```
 
 ## Node modules
