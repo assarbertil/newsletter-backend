@@ -23,10 +23,21 @@ app.set("view engine", "pug"); // Template engine
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 app.use(express.json());
 app.use(cookieParser());
+const corsWhitelist = [
+  "http://localhost:3000",
+  "https://newsletter-frontend-assarbertil.vercel.app/",
+  process.env.FRONTEND_URL,
+];
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    origin: (origin, callback) => {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 app.use(express.static(dirname + "/public")); // Static folder
