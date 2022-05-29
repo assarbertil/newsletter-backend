@@ -29,7 +29,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:5678",
-      "https://newsletter-frontend-assarbertil.vercel.app/",
+      "https://newsletter-frontend-assarbertil.vercel.app",
       process.env.FRONTEND_URL,
     ],
   })
