@@ -60,7 +60,11 @@ router.post("/api/register", async (req, res) => {
 router.post("/api/refresh-token", async (req, res) => {
   const token = req.cookies.jid;
   if (!token) {
-    return res.send({ ok: false, accessToken: "" });
+    return res.send({
+      ok: false,
+      message: "No token provided in request",
+      accessToken: "",
+    });
   }
 
   let payload;
@@ -68,17 +72,29 @@ router.post("/api/refresh-token", async (req, res) => {
     payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
   } catch (err) {
     console.log(err);
-    return res.send({ ok: false, accessToken: "" });
+    return res.send({
+      ok: false,
+      message: "The token has been generated with another secret",
+      accessToken: "",
+    });
   }
 
   // If the token is valid, send back a new access token
   const user = await User.findById(payload.userId);
   if (!user) {
-    return res.send({ ok: false, accessToken: "" });
+    return res.send({
+      ok: false,
+      message: "The provided id is not associated with a user",
+      accessToken: "",
+    });
   }
 
   // Set refresh token cookie
   res.cookie("jid", createRefreshToken(user._id), { httpOnly: true });
 
-  return res.send({ ok: true, accessToken: createAccessToken(user._id) });
+  return res.send({
+    ok: true,
+    message: "Updated access token received",
+    accessToken: createAccessToken(user._id),
+  });
 });

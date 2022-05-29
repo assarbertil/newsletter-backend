@@ -23,7 +23,12 @@ app.set("view engine", "pug"); // Template engine
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 app.use(express.static(dirname + "/public")); // Static folder
 
 // Routers
