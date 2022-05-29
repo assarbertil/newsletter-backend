@@ -1,9 +1,7 @@
 import { Router } from "express";
 import { User } from "../models/User.js";
 import * as argon2 from "argon2";
-import jwt from "jsonwebtoken";
-import { createAccessToken, createRefreshToken } from "../lib/jwt.js";
-const { sign } = jwt;
+import { createAccessToken } from "../lib/jwt.js";
 
 export const router = Router();
 
@@ -25,7 +23,7 @@ router.post("/api/login", async (req, res) => {
   // If all is good, sign a reshresh token and an access token and send it back
 
   // Refresh token
-  res.cookie("jid", createRefreshToken(user._id), { httpOnly: true });
+  res.cookie("jid", createAccessToken(user._id), { httpOnly: true });
 
   // Access token
   res.json({
@@ -54,47 +52,4 @@ router.post("/api/register", async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-});
-
-// Refresh token renewal endpoint
-router.post("/api/refresh-token", async (req, res) => {
-  const token = req.cookies.jid;
-  if (!token) {
-    return res.send({
-      ok: false,
-      message: "No token provided in request",
-      accessToken: "",
-    });
-  }
-
-  let payload;
-  try {
-    payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
-  } catch (err) {
-    console.log(err);
-    return res.send({
-      ok: false,
-      message: "The token has been generated with another secret",
-      accessToken: "",
-    });
-  }
-
-  // If the token is valid, send back a new access token
-  const user = await User.findById(payload.userId);
-  if (!user) {
-    return res.send({
-      ok: false,
-      message: "The provided id is not associated with a user",
-      accessToken: "",
-    });
-  }
-
-  // Set refresh token cookie
-  res.cookie("jid", createRefreshToken(user._id), { httpOnly: true });
-
-  return res.send({
-    ok: true,
-    message: "Updated access token received",
-    accessToken: createAccessToken(user._id),
-  });
 });

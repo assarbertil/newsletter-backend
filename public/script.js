@@ -48,7 +48,6 @@ const deleteUser = (id, email) => {
       .delete(`/api/user/${id}`)
       .then(res => {
         const row = document.querySelector(`[data-user="${id}"]`);
-        console.log(row);
         row.classList.contains("slide-in") && row.classList.remove("slide-in");
         row.classList.add("slide-out");
       })

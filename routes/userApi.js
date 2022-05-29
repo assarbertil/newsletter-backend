@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { isAuth } from "../middleware/isAuth.js";
 import { User } from "../models/User.js";
 
 export const router = Router();
@@ -22,17 +21,16 @@ const getUser = async (req, res, next) => {
 
 // Get a user by id
 // *Requires a session cookie
-router.get("/api/user/:id", isAuth, getUser, (req, res) => {
-  console.log(res.isAuthed);
-  if (res.isAuthed) {
-    res.json({
-      id: res.user._id,
-      email: res.user.email,
-      isSubscribed: res.user.isSubscribed,
-    });
-  } else {
-    res.status(403).json({ message: "Access denied" });
-  }
+router.get("/api/user/:id", getUser, (req, res) => {
+  // if (res.isAuthed) {
+  res.json({
+    id: res.user._id,
+    email: res.user.email,
+    isSubscribed: res.user.isSubscribed,
+  });
+  // } else {
+  // res.status(403).json({ message: "Access denied" });
+  // }
 });
 
 // Delete user by id
