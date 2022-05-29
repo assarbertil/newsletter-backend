@@ -37,6 +37,6 @@ app.use(authApiRouter);
 app.use(userApiRouter);
 
 // Make server available on port
-app.listen(port, () =>
+app.listen(process.env.PORT || port, () =>
   console.log(chalk.blueBright(`Server is running on http://localhost:${port}`))
 );
